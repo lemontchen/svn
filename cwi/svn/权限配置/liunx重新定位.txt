@@ -1,0 +1,13 @@
+svn switch --relocate svn://121.42.162.87/wardrobe svn://121.42.162.87/project/wardrobe
+
+之前用的svn账号权限不够，需要使用别的账号，所以提出需求——怎么使用新的svn账号进行操作
+
+方法一：
+
+linux下删除~/.subversion/auth即可清除之前的用户名和密码：rm -rf ~/.subversion/auth
+
+以后再操作svn会提示你输入用户名，这时就可以使用新的了
+
+方法二：
+
+临时切换，在命令下强制加上 --username 和--password选项，例如：svn up --username chka --password 123456

@@ -1,0 +1,71 @@
+### This file is an example authorization file for svnserve.
+### Its format is identical to that of mod_authz_svn authorization
+### files.
+### As shown below each section defines authorizations for the path and
+### (optional) repository specified by the section name.
+### The authorizations follow. An authorization line can refer to:
+###  - a single user,
+###  - a group of users defined in a special [groups] section,
+###  - an alias defined in a special [aliases] section,
+###  - all authenticated users, using the '$authenticated' token,
+###  - only anonymous users, using the '$anonymous' token,
+###  - anyone, using the '*' wildcard.
+###
+### A match can be inverted by prefixing the rule with '~'. Rules can
+### grant read ('r') access, read-write ('rw') access, or no access
+### ('').
+
+[aliases]
+# joe = /C=XZ/ST=Dessert/L=Snake City/O=Snake Oil, Ltd./OU=Research Institute/CN=Joe Average
+
+[groups]
+g_manager=hanyu,liye,shangguan
+webProgrammer=wangkaili,zhengjiayu,zhangshirao,huangyoulong,yuanxuecheng,chenkangkang,luoxiong,xucongcong,zhenxiaoping,liyang
+project_p=chenkangkang,xucongcong,zengweixiong
+ui=xule,chencongya
+ios=zhangyukai,shijinping
+android=caimingyu,daizhifeng,penghao,liubing
+practice=
+
+cwi=chenkangkang,zhengjiayu,yuanxuecheng,chencongya
+wardrobe=chenkangkang,liyang,wangkaili,xule
+dianxinProject=luoxiong,zhenxiaoping,huangyoulong
+Goldpecker=luoxiong,zhenxiaoping,huangyoulong,yuanxuecheng
+Floatcat=luoxiong,zhenxiaoping,huangyoulong,wangkaili,chencongya
+EveryonePoker=xucongcong,liyang,penghao,shijinping,zengweixiong
+
+#[/]
+## @project_p = rw
+## @programmer =rw
+## @test = r
+##*=
+
+#[repo:/]
+#*=rw
+#@manager=rw
+# @cwi=chenkangkang
+# *=rw
+
+[project:/cwi]
+@g_manager = rw
+@cwi = rw
+
+[project:/wardrobe]
+@g_manager = rw
+@wardrobe = rw
+
+[project:/dianxinProject]
+@g_manager = rw
+@dianxinProject = rw
+
+[project:/App/Goldpecker]
+@g_manager = rw
+@Goldpecker = rw
+
+[project:/siteWeb/Floatcat]
+@g_manager = rw
+@Floatcat = rw
+
+[project:/App/EveryonePoker]
+@g_manager = rw
+@EveryonePoker = rw
